@@ -1,0 +1,98 @@
+html {
+    /* font-size: 62.5%; */
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+.calculator {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+}
+
+#display {
+    width: 100%;
+    font-size: 4rem;
+    height: 80px;
+    border: none;
+    background-color: #252525;
+    color: #fff;
+    text-align: right;
+    padding-right: 20px;
+    padding-left: 10px;
+}
+
+/* Button styling */
+
+button {
+    height: 60px;
+    background-color: #fff;
+    border-radius: 3px;
+    border: 1px solid #c4c4c4;
+    background-color: transparent;
+    font-size: 2rem;
+    color: #333;
+    background-image: linear-gradient(to bottom,transparent,transparent 50%,rgba(0,0,0,.04));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 1px 0 0 rgba(255,255,255,.45), inset 0 -1px 0 0 rgba(255,255,255,.15), 0 1px 0 0 rgba(255,255,255,.15);
+    text-shadow: 0 1px rgba(255,255,255,.4);
+}
+
+button:hover {
+    background-color: #eaeaea;
+}
+
+.operator {
+    color: #337cac;
+    /* grid-area: 1 / 1 / 2 / 5; - how to get the div to start there but keep buttons separate? Maybe just best to rearrange the HTML appropriately */
+}
+
+.clear {
+    background-color: #f0595f;
+    border-color: #b0353a;
+    color: #fff;
+    grid-area: 6 / 3 / 7 / 4;
+}
+
+.clear:hover {
+    background-color: #f17377;
+}
+
+.equals {
+    background-color: #2e86c0;
+    border-color: #337cac;
+    color: #fff;
+    height: 100%;
+    /* grid-row-start: 2;
+    grid-row-end: 6;
+    grid-column-start: 4;
+    grid-column-end: 5; 
+    grid-area: 2 / 4 / 6 / 5 is a way cooler way to do grid-row-start / grid-column start / grid-row-end / grid-column-end */
+    grid-area: 2 / 4 / 7 / 5;
+}
+
+.equals:hover {
+    background-color: #4e9ed4;
+}
+
+/* Grid layout */
+
+.calc-keys {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr;  cleaner way to write this!*/
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+#zero {
+    grid-area: 5 / 2 / 6 / 4;
+}
