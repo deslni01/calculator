@@ -9,16 +9,17 @@
 
 <body>
   <div id="container">
+    <h1>A calculawhoser</h1>
     <div class="calculator">
       <div id="display">0.0</div>
       <div class="calc-keys">        
         <button type="button" value="clear" class="clear">Clear</button>
 
-        <button type="button" value="add" class="operator">+</button>
-        <button type="button" value="subtract" class="operator">-</button>
-        <button type="button" value="multiply" class="operator">x</button>
-        <button type="button" value="divide" class="operator">/</button>
-        <button type="button" value="equals" class="equals">=</button>
+        <button type="button" value="+" class="operator">+</button>
+        <button type="button" value="-" class="operator">-</button>
+        <button type="button" value="*" class="operator">X</button>
+        <button type="button" value="/" class="operator">/</button>
+        <button type="button" value="=" class="equals">=</button>
 
         <button type="button" value="7" class="digits">7</button>
         <button type="button" value="8" class="digits">8</button>
@@ -33,19 +34,176 @@
         <button type="button" value="3" class="digits">3</button>
 
         <button type="button" value="0" class="digits" id="zero">0</button>
-        <button type="button" value="decimal">.</button>
-        <button type="button" value="minus">+/-</button>
+        <button type="button" value="." class="decimal">.</button>
+        <button type="button" value="back" class="back">Back</button>
+        <button type="button" value="-" id="back">+/-</button>
         
 
-        <button type="button" value="factorial">!</button>
+        <button type="button" value="!" class="operator">!</button>
       </div>
     </div>
+
   </div>
+  <p>Yep. Neato.</p>
 </body>
 </html>
 
 
 <script>
 
+let firstValue = '';
+let secondValue = '';
+let operator = '';
 
+// working digits to display + clear + back:
+const display = document.querySelector('#display');
+const button = document.querySelectorAll('button');
+const operatorBtn = document.querySelectorAll('.operator');
+const numberBtn = document.querySelectorAll('.digits');
+const equalsBtn = document.querySelectorAll('.equals');
+const backBtn = document.querySelectorAll('.back');
+const clearBtn = document.querySelectorAll('.clear');
+const decimalBtn = document.querySelectorAll('.decimal');
+
+    
+    decimalBtn.forEach((button) => {
+        button.addEventListener('click', () => {
+          appendDecimal();
+        })
+    })
+
+    operatorBtn.forEach((button) => {
+    button.addEventListener('click', () => {
+    if (operator === '') {
+        firstValue = display.textContent;
+        
+        operator = `${button.value}`;
+        
+        display.textContent = '';
+    } else {
+        if (secondValue !== '') {
+            firstValue = display.textContent;
+            operator = `${button.value}`;
+        
+            display.textContent = '';
+        } else {
+            return;
+        }
+    }
+        
+    })
+})
+
+    equalsBtn.forEach((button) => {
+        button.addEventListener('click', () => {
+            
+            secondValue = display.textContent;
+            display.textContent = '';
+            
+            
+            display.textContent = operate(operator, firstValue, secondValue);
+
+        })
+    })
+
+    backBtn.forEach((button) => {
+        button.addEventListener('click', () => {
+            backDisplay();
+        })
+    })
+
+    clearBtn.forEach((button) => {
+        button.addEventListener('click', () => {
+            clearDisplay();
+        })
+    })
+
+    numberBtn.forEach((button) => {
+        button.addEventListener('click', () => {
+          if (display.textContent === '0.0') {
+            clearDisplay();
+            display.textContent += `${button.value}`;
+          } else {
+            display.textContent += `${button.value}`;
+          }
+        })
+    })
+
+
+  // clear functionality
+function clearDisplay() {
+    display.textContent = '';
+    // reset other variables
+    firstValue = '';
+    secondValue = '';
+    operator = '';
+}
+
+  // back functionality
+function backDisplay() {
+  display.textContent = display.textContent.toString().slice(0, -1);
+}
+
+  // decimal functionality
+function appendDecimal() {
+  // console.log works, but it isn't 
+  if (display.textContent === '0.0') {
+      display.textContent += '0';
+  } else {
+      if (display.textContent.includes('.')) return;
+      display.textContent += '.';
+  }
+}
+
+function add(a, b) {
+  return +a + +b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function divide(a, b) {
+  if (b === '0') {
+    let noZero = 'No can do-sville.';
+    return noZero;
+  } else {
+    return a / b;
+  }
+}
+
+// factorial for funsies
+// may need to limit input? will be huge numbers..
+function factorial(a) {
+  let factorialNum = 1;
+  for (let i = a; i > 1; i--) {
+      factorialNum *= i;        
+  }
+  return factorialNum;
+}
+
+function operate(operator, a, b) {
+  switch (operator) {
+    // need to add decimal maximum, rounding
+      case '+':
+          return add(a, b);
+          break;
+      case '-':
+          return subtract(a, b);
+          break;
+      case '*':
+          return multiply(a, b);
+          break;
+      case '/':
+          return divide(a, b);
+          break;
+      case '!':
+          return factorial(a); // does this work with only 1 number?
+          break;
+  }
+}
 </script>

@@ -9,6 +9,22 @@ html {
     box-sizing: inherit;
 }
 
+#container {
+    background-color: #fff;
+    height: 80vh;
+    width: 100vw;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 200px;
+    font-size: 50px;
+}
+
+p  {
+    text-align: center;
+}
+
 .calculator {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -20,8 +36,8 @@ html {
 }
 
 #display {
-    width: 100%;
-    font-size: 4rem;
+    width: 100.25%;
+    font-size: 2rem;
     height: 80px;
     border: none;
     background-color: #252525;
@@ -29,6 +45,7 @@ html {
     text-align: right;
     padding-right: 20px;
     padding-left: 10px;
+    padding-top: 20px;
 }
 
 /* Button styling */
@@ -51,8 +68,12 @@ button:hover {
 }
 
 .operator {
-    color: #337cac;
-    /* grid-area: 1 / 1 / 2 / 5; - how to get the div to start there but keep buttons separate? Maybe just best to rearrange the HTML appropriately */
+    /* color: #337cac; */
+    background-color: hsl(133, 86%, 55%);
+}
+
+.operator:hover {
+    background-color: hsl(133, 86%, 75%);
 }
 
 .clear {
@@ -83,6 +104,14 @@ button:hover {
     background-color: #4e9ed4;
 }
 
+#back {
+    background-color: hsl(62, 82%, 55%);
+}
+
+#back:hover {
+    background-color: hsl(62, 72%, 75%);
+}
+
 /* Grid layout */
 
 .calc-keys {
@@ -94,5 +123,6 @@ button:hover {
 }
 
 #zero {
-    grid-area: 5 / 2 / 6 / 4;
+    grid-area: 5 / 2 / 6 / 3;
 }
+
